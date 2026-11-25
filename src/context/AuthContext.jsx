@@ -2,7 +2,6 @@ import React, { createContext, useContext, useState, useEffect, useCallback } fr
 
 const AuthContext = createContext(null);
 
-const BACKEND_URL = ''; // Uses Vite proxy (or same-origin) to avoid hardcoding localhost
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -13,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   const checkAuth = useCallback(async () => {
     try {
       setIsLoading(true);
-      const res = await fetch('/api/auth/me', {
+      const res = await fetch(`${BACKEND_URL}/api/auth/me`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include'
@@ -46,7 +45,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     setAuthError(null);
     try {
-      const res = await fetch('/api/auth/login', {
+      const res = await fetch(`${BACKEND_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -75,7 +74,7 @@ export const AuthProvider = ({ children }) => {
   const register = async ({ fullName, email, password, confirmPassword }) => {
     setAuthError(null);
     try {
-      const res = await fetch('/api/auth/register', {
+      const res = await fetch(`${BACKEND_URL}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -103,7 +102,7 @@ export const AuthProvider = ({ children }) => {
   // Logout action
   const logout = async () => {
     try {
-      await fetch('/api/auth/logout', {
+      await fetch(`${BACKEND_URL}/api/auth/logout`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include'
