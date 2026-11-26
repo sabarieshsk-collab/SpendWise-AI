@@ -1,4 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+const BACKEND_URL = (
+  import.meta.env.VITE_API_URL || ''
+).replace(/\/$/, '');
 
 const AuthContext = createContext(null);
 
