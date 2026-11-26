@@ -22,6 +22,7 @@ dotenv.config({ path: path.resolve(__dirname, '../.env') })
 dotenv.config()
 
 const app = express()
+app.set('trust proxy', 1);
 const PORT = process.env.PORT || 5000
 const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || 'http://localhost:3000'
 
@@ -118,15 +119,13 @@ app.listen(PORT, () => {
   console.log(`[SpendWise Backend] Server listening securely on port ${PORT}`)
   console.log(`[SpendWise Backend] Allowed Frontend Origin: ${FRONTEND_ORIGIN}`)
   console.log(
-    `[SpendWise Backend] OpenRouter Status: ${
-      isOpenRouterConfigured() ? 'Configured' : 'Awaiting OPENROUTER_API_KEY in backend/.env'
+    `[SpendWise Backend] OpenRouter Status: ${isOpenRouterConfigured() ? 'Configured' : 'Awaiting OPENROUTER_API_KEY in backend/.env'
     }`
   )
   console.log(
-    `[SpendWise Backend] n8n Automation Status: ${
-      process.env.SPENDWISE_N8N_WEBHOOK_URL && process.env.SPENDWISE_WEBHOOK_SECRET
-        ? 'Configured'
-        : 'Awaiting SPENDWISE_N8N_WEBHOOK_URL / SPENDWISE_WEBHOOK_SECRET in backend/.env'
+    `[SpendWise Backend] n8n Automation Status: ${process.env.SPENDWISE_N8N_WEBHOOK_URL && process.env.SPENDWISE_WEBHOOK_SECRET
+      ? 'Configured'
+      : 'Awaiting SPENDWISE_N8N_WEBHOOK_URL / SPENDWISE_WEBHOOK_SECRET in backend/.env'
     }`
   )
 })

@@ -1,5 +1,9 @@
 
-const API_URL = '/api/finance';
+const BACKEND_URL = (
+    import.meta.env.VITE_API_URL || ''
+).replace(/\/$/, '');
+
+const API_URL = `${BACKEND_URL}/api/finance`;
 
 /**
  * Fetch the authenticated user's financial data.
