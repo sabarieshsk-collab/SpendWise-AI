@@ -1,8 +1,6 @@
 
 import mongoose from 'mongoose'
-import dns from 'node:dns'
 
-dns.setServers(['172.29.117.199'])
 let isConnected = false
 
 // Prevent unhandled error events from crashing the server
